@@ -9,10 +9,12 @@
 import UIKit
 import SceneKit
 import ARKit
+import AVFoundation
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    var bombSoundEffect: AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +26,45 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let scene = SCNScene()
         
         // Set the scene to the view
         sceneView.scene = scene
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(gestureRecognize:)))
+        view.addGestureRecognizer(tapGesture)
+        
+        let path = Bundle.main.path(forResource: "havemercy.wav", ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+        do {
+            bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+        } catch {
+            // couldn't load file :(
+        }
+    }
+    
+    @objc
+    func handleTap(gestureRecognize: UITapGestureRecognizer) {
+        guard let currentFrame = sceneView.session.currentFrame else {
+            return
+        }
+        let imagePlane = SCNPlane(width: sceneView.bounds.width / 6000,
+                                  height: sceneView.bounds.height / 6000)
+        imagePlane.firstMaterial?.diffuse.contents = UIImage(named:"johnny")
+        imagePlane.firstMaterial?.lightingModel = .constant
+        
+        let planeNode = SCNNode(geometry: imagePlane)
+        sceneView.scene.rootNode.addChildNode(planeNode)
+        var translation = matrix_identity_float4x4
+        translation.columns.3.z = -0.1
+        planeNode.simdTransform = matrix_multiply(currentFrame.camera.transform, translation)
+        
+        do {
+            bombSoundEffect?.play()
+        } catch {
+            // couldn't load file :(
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

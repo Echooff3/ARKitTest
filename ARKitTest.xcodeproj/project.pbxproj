@@ -13,6 +13,8 @@
 		9A9E2F821F76CFA0004A54E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E2F801F76CFA0004A54E4 /* Main.storyboard */; };
 		9A9E2F841F76CFA0004A54E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E2F831F76CFA0004A54E4 /* Assets.xcassets */; };
 		9A9E2F871F76CFA0004A54E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E2F851F76CFA0004A54E4 /* LaunchScreen.storyboard */; };
+		9A9E2F8F1F76D7E7004A54E4 /* johnny.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E2F8E1F76D7E7004A54E4 /* johnny.png */; };
+		9A9E2F911F76DCE8004A54E4 /* havemercy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E2F901F76DCE7004A54E4 /* havemercy.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		9A9E2F831F76CFA0004A54E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A9E2F861F76CFA0004A54E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A9E2F881F76CFA0004A54E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A9E2F8E1F76D7E7004A54E4 /* johnny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = johnny.png; sourceTree = "<group>"; };
+		9A9E2F901F76DCE7004A54E4 /* havemercy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = havemercy.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		9A9E2F791F76CFA0004A54E4 /* ARKitTest */ = {
 			isa = PBXGroup;
 			children = (
+				9A9E2F901F76DCE7004A54E4 /* havemercy.wav */,
+				9A9E2F8E1F76D7E7004A54E4 /* johnny.png */,
 				9A9E2F7A1F76CFA0004A54E4 /* AppDelegate.swift */,
 				9A9E2F7C1F76CFA0004A54E4 /* art.scnassets */,
 				9A9E2F7E1F76CFA0004A54E4 /* ViewController.swift */,
@@ -129,7 +135,9 @@
 				9A9E2F7D1F76CFA0004A54E4 /* art.scnassets in Resources */,
 				9A9E2F871F76CFA0004A54E4 /* LaunchScreen.storyboard in Resources */,
 				9A9E2F841F76CFA0004A54E4 /* Assets.xcassets in Resources */,
+				9A9E2F8F1F76D7E7004A54E4 /* johnny.png in Resources */,
 				9A9E2F821F76CFA0004A54E4 /* Main.storyboard in Resources */,
+				9A9E2F911F76DCE8004A54E4 /* havemercy.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
