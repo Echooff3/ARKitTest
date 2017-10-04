@@ -14,8 +14,9 @@ import AVFoundation
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet var lblCount: UILabel!
     var bombSoundEffect: AVAudioPlayer?
-    
+    var count = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,13 +35,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
         
-        let path = Bundle.main.path(forResource: "havemercy.wav", ofType:nil)!
+        let path = Bundle.main.path(forResource: "sheep.wav", ofType:nil)!
         let url = URL(fileURLWithPath: path)
         do {
             bombSoundEffect = try AVAudioPlayer(contentsOf: url)
         } catch {
             // couldn't load file :(
         }
+        self.view.addSubview(self.lblCount)
     }
     
     @objc
@@ -48,17 +50,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         guard let currentFrame = sceneView.session.currentFrame else {
             return
         }
-        let imagePlane = SCNPlane(width: sceneView.bounds.width / 6000,
-                                  height: sceneView.bounds.height / 6000)
-        imagePlane.firstMaterial?.diffuse.contents = UIImage(named:"johnny")
-        imagePlane.firstMaterial?.lightingModel = .constant
-        
-        let planeNode = SCNNode(geometry: imagePlane)
-        sceneView.scene.rootNode.addChildNode(planeNode)
+        let sheep = SCNScene(named:"sheep.dae")
+        let sheepNode = sheep?.rootNode.childNode(withName: "Sheep", recursively: true)!
+        sceneView.scene.rootNode.addChildNode(sheepNode!)
         var translation = matrix_identity_float4x4
-        translation.columns.3.z = -0.1
-        planeNode.simdTransform = matrix_multiply(currentFrame.camera.transform, translation)
-        
+        translation.columns.3.z = -2.0
+        translation.columns.3.y = -0.25
+        sheepNode?.simdTransform = matrix_multiply(currentFrame.camera.transform, translation)
+        sheepNode?.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+        count += 1
+        let msg = String(format:"Sheep Count: %d", count)
+        self.lblCount.text = msg
         do {
             bombSoundEffect?.play()
         } catch {
